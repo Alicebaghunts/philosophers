@@ -6,16 +6,28 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:10 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/20 18:22:24 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/05/21 01:41:13 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*pxik(void *data)
+void	*actions(void *data)
 {
-	(void)data;
-	printf("pxik\n");
+	t_philo	*philo;
+
+	philo = (t_philo *)data;
+	while (1)
+	{
+		pthread_mutex_lock(&philo->table->program_stop_mutex);
+		if (philo->table->program_stop)
+			return (pthread_mutex_unlock(&philo->table->program_stop_mutex),
+				NULL);
+		pthread_mutex_unlock(&philo->table->program_stop_mutex);
+		philo_eating(philo);
+		philo_sleep(philo);
+		philo_think(philo);
+	}
 	return (NULL);
 }
 
@@ -26,7 +38,9 @@ void	create_threads(t_table *table)
 	index = 0;
 	while (index < table->philo_count)
 	{
-		pthread_create(&table->philo[index].thread, NULL, pxik, NULL);
+		pthread_create(&table->philo[index].thread, NULL,
+			actions, &table->philo[index]);
+
 		index++;
 	}
 }

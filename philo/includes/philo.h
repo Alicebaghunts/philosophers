@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/20 17:53:26 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/05/21 01:13:21 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ void	free_table(t_table *table);
 void	free_philo(t_table *table);
 int		init_mutexes(t_table *table);
 
+void	philo_think(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	put_fork(t_philo *philo);
+void	pick_fork(t_philo *philo);
+void	print_action(t_philo *philo, const char *str);
+void	philo_eating(t_philo *philo);
+void	philo_usleep(t_philo *philo, int sleep_time);
+void	*actions(void *data);
 
 ////
 
