@@ -6,11 +6,30 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:38:16 by alisharu          #+#    #+#             */
-/*   Updated: 2025/05/21 01:11:26 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:14:13 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	check_philosopher_death(t_table *table, int index)
+{
+	pthread_mutex_lock(&table->philo[index].last_meal_mutex);
+	if (get_time_in_ms() - table->philo[index].last_meal > table->time_to_die)
+	{
+		pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
+		pthread_mutex_lock(&table->program_stop_mutex);
+		table->program_stop = 1;
+		pthread_mutex_unlock(&table->program_stop_mutex);
+		pthread_mutex_lock(&table->print_mutex);
+		printf("[%ld] %d philo is dead", get_time_in_ms() - table->start_time,
+			index + 1);
+		pthread_mutex_unlock(&table->print_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
+	return (0);
+}
 
 long	get_time_in_ms(void)
 {

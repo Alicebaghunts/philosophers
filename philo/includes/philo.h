@@ -6,7 +6,7 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:42:34 by miaghabe          #+#    #+#             */
-/*   Updated: 2025/05/21 01:13:21 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:51:09 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,8 @@ void	print_action(t_philo *philo, const char *str);
 void	philo_eating(t_philo *philo);
 void	philo_usleep(t_philo *philo, int sleep_time);
 void	*actions(void *data);
-
-////
-
-void	print_error(void);
 long	get_time_in_ms(void);
-
-// parsing
-void	parse_arguments(t_table *table, char **argv);
-
-
+void	create_philos(t_table *table);
+void	join_philos(t_table *table);
 
 #endif

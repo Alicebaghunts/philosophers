@@ -6,26 +6,11 @@
 /*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:10:00 by alisharu          #+#    #+#             */
-/*   Updated: 2025/05/21 01:49:15 by alisharu         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:41:01 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	print_action(t_philo *philo, const char *str)
-{
-	pthread_mutex_lock(&philo->table->program_stop_mutex);
-	if (!philo->table->program_stop)
-	{
-		pthread_mutex_unlock(&philo->table->program_stop_mutex);
-		pthread_mutex_lock(&philo->table->print_mutex);
-		printf("[%ld] %d %s\n",get_time_in_ms()
-			- philo->table->start_time, philo->index, str);
-		pthread_mutex_unlock(&philo->table->print_mutex);
-	}
-	else
-		pthread_mutex_unlock(&philo->table->program_stop_mutex);
-}
 
 void	pick_fork(t_philo *philo)
 {
@@ -62,26 +47,21 @@ void	put_fork(t_philo *philo)
 void	philo_eating(t_philo *philo)
 {
 	pick_fork(philo);
-
 	print_action(philo, "is eating");
 	philo_usleep(philo, philo->table->time_to_eat);
-	printf("ASTVAC IM\n");
 	pthread_mutex_lock(&philo->last_meal_mutex);
 	philo->last_meal = get_time_in_ms();
 	pthread_mutex_unlock(&philo->last_meal_mutex);
 	pthread_mutex_lock(&philo->table->num_eats_mutex);
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->table->num_eats_mutex);
-
 	put_fork(philo);
 }
-
 
 void	philo_sleep(t_philo *philo)
 {
 	print_action(philo, "is sleeping");
 	philo_usleep(philo, philo->table->time_to_sleep);
-
 }
 
 void	philo_think(t_philo *philo)
