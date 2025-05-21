@@ -32,11 +32,12 @@ typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
-	long			philo_count;
-	long			time_to_die;
-	long			time_to_eat;
-	long			time_to_sleep;
-	long			num_eats;
+	int				philo_count;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				num_eats;
+	int				full_eats_count;
 	long			start_time;
 	int				program_stop;
 	pthread_mutex_t	print_mutex;
@@ -44,6 +45,8 @@ typedef struct s_table
 	pthread_mutex_t	num_eats_mutex;
 	pthread_mutex_t	start_time_mutex;
 	pthread_mutex_t	*forks;
+	pthread_t		thread_die;
+	pthread_t		thread_fullness;
 	t_philo			*philo;
 }	t_table;
 
@@ -82,5 +85,7 @@ void	*actions(void *data);
 long	get_time_in_ms(void);
 void	create_philos(t_table *table);
 void	join_philos(t_table *table);
-
+void	*check_philosopher_death(void *data);
+void	*check_all_philosophers_full(void *data);
+void	print_string(t_table *table, char *str, int index);
 #endif

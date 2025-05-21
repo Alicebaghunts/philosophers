@@ -48,12 +48,13 @@ void	philo_eating(t_philo *philo)
 {
 	pick_fork(philo);
 	print_action(philo, "is eating");
-	philo_usleep(philo, philo->table->time_to_eat);
 	pthread_mutex_lock(&philo->last_meal_mutex);
 	philo->last_meal = get_time_in_ms();
 	pthread_mutex_unlock(&philo->last_meal_mutex);
+	philo_usleep(philo, philo->table->time_to_eat);
 	pthread_mutex_lock(&philo->table->num_eats_mutex);
-	philo->eat_count++;
+	if (++philo->eat_count == philo->table->num_eats)
+		philo->table->full_eats_count++;
 	pthread_mutex_unlock(&philo->table->num_eats_mutex);
 	put_fork(philo);
 }

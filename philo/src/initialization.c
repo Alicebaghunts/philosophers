@@ -81,7 +81,7 @@ int	init_philo(t_table *table)
 	{
 		table->philo[index].index = index + 1;
 		table->philo[index].eat_count = 0;
-		table->philo[index].last_meal = get_time_in_ms();
+		table->philo[index].last_meal =  get_time_in_ms();
 		table->philo[index].left_fork = &table->forks[index];
 		table->philo[index].right_fork = &table->forks[(index + 1)
 			% table->philo_count];
@@ -104,6 +104,7 @@ t_table	*init_table(int argc, char **argv)
 	table->time_to_eat = ft_atol(argv[3]);
 	table->time_to_sleep = ft_atol(argv[4]);
 	table->num_eats = 0;
+	table->full_eats_count = 0;
 	if (argc == 6)
 		table->num_eats = ft_atol(argv[5]);
 	table->program_stop = 0;
