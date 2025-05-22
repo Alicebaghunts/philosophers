@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   checkings_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <alisharu@student.42.fr>          #+#  +:+       +#+        */
+/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-05-21 15:00:15 by alisharu          #+#    #+#             */
-/*   Updated: 2025-05-21 15:00:15 by alisharu         ###   ########.fr       */
+/*   Created: 2025/05/21 15:00:15 by alisharu          #+#    #+#             */
+/*   Updated: 2025/05/22 13:44:40 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "unistd.h"
-
 void	print_string(t_table *table, char *str, int index)
 {
 	pthread_mutex_lock(&table->print_mutex);
@@ -29,7 +28,11 @@ void	*check_philosopher_death(void *data)
 	table = (t_table *)data;
 	while (1)
 	{
-		usleep(10000);
+		pthread_mutex_lock(&table->program_stop_mutex);
+		if (table->program_stop)
+			return (pthread_mutex_unlock(&table->program_stop_mutex), NULL);
+		pthread_mutex_unlock(&table->program_stop_mutex);
+		usleep(100);
 		index = 0;
 		while (index < table->philo_count)
 		{
@@ -51,7 +54,6 @@ void	*check_philosopher_death(void *data)
 	return (NULL);
 }
 
-
 void	*check_all_philosophers_full(void *data)
 {
 	t_table	*table;
@@ -59,18 +61,26 @@ void	*check_all_philosophers_full(void *data)
 	table = (t_table *)data;
 	while (1)
 	{
+		pthread_mutex_lock(&table->program_stop_mutex);
+		if (table->program_stop)
+			return (pthread_mutex_unlock(&table->program_stop_mutex), NULL);
+		pthread_mutex_unlock(&table->program_stop_mutex);
+		usleep(100);
 		pthread_mutex_lock(&table->num_eats_mutex);
 		if (table->full_eats_count == table->philo_count)
 		{
+			pthread_mutex_unlock(&table->num_eats_mutex);
 			pthread_mutex_lock(&table->program_stop_mutex);
 			table->program_stop = 1;
-			pthread_mutex_lock(&table->print_mutex);
-			printf("[%ld] Dinner is over\n", get_time_in_ms()
-				- table->start_time);
-			pthread_mutex_unlock(&table->print_mutex);
 			pthread_mutex_unlock(&table->program_stop_mutex);
+			pthread_mutex_lock(&table->print_mutex);
+			printf("[%ld] Dinner is over\n",
+				get_time_in_ms() - table->start_time);
+			pthread_mutex_unlock(&table->print_mutex);
 			return (NULL);
 		}
+		else
+			pthread_mutex_unlock(&table->num_eats_mutex);
 	}
 	return (NULL);
 }
