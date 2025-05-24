@@ -81,7 +81,7 @@ int	init_philo(t_table *table)
 	{
 		table->philo[index].index = index + 1;
 		table->philo[index].eat_count = 0;
-		table->philo[index].last_meal =  get_time_in_ms();
+		table->philo[index].last_meal = get_time_in_ms();
 		table->philo[index].left_fork = &table->forks[index];
 		table->philo[index].right_fork = &table->forks[(index + 1)
 			% table->philo_count];

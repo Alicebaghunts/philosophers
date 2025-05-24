@@ -35,20 +35,6 @@ void	pick_fork(t_philo *philo)
 	pthread_mutex_unlock(&philo->last_meal_mutex);
 }
 
-// void	put_fork(t_philo *philo)
-// {
-// 	if (philo->index % 2 == 0)
-// 	{
-// 		pthread_mutex_unlock(philo->right_fork);
-// 		pthread_mutex_unlock(philo->left_fork);
-// 	}
-// 	else
-// 	{
-// 		pthread_mutex_unlock(philo->left_fork);
-// 		pthread_mutex_unlock(philo->right_fork);
-// 	}
-// }
-
 void	philo_eating(t_philo *philo)
 {
 	pick_fork(philo);
