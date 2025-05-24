@@ -11,6 +11,17 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+void one_philo(t_table *table)
+{
+	pthread_mutex_lock(&table->program_stop_mutex);
+	printf("[%ld] 1 has taken a fork\n", get_time_in_ms()
+		- table->start_time);
+	usleep(table->time_to_die * 1000);
+	printf("[%ld] 1 died\n", get_time_in_ms()
+		- table->start_time);
+	pthread_mutex_unlock(&table->program_stop_mutex);
+	free_table(table);
+}
 
 int	main(int argc, char **argv)
 {
@@ -21,6 +32,8 @@ int	main(int argc, char **argv)
 	if (validation(argc, argv) == 0)
 		return (0);
 	table = init_table(argc, argv);
+	if (table->philo_count == 1)
+		return (one_philo(table), 0);
 	table->start_time = get_time_in_ms();
 	create_philos(table);
 	pthread_create(&table->thread_die, NULL, check_philosopher_death, table);

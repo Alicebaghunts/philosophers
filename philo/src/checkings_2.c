@@ -44,7 +44,7 @@ void	*check_philosopher_death(void *data)
 				pthread_mutex_lock(&table->program_stop_mutex);
 				table->program_stop = 1;
 				pthread_mutex_unlock(&table->program_stop_mutex);
-				print_string(table, "philo is dead", index);
+				print_string(table, "died", index);
 				return (NULL);
 			}
 			pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
