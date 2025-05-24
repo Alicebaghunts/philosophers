@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-void one_philo(t_table *table)
+
+void	one_philo(t_table *table)
 {
 	pthread_mutex_lock(&table->program_stop_mutex);
 	printf("[%ld] 1 has taken a fork\n", get_time_in_ms()
 		- table->start_time);
-	usleep(table->time_to_die * 1000);
+	usleep((table->time_to_die + 1) * 1000);
 	printf("[%ld] 1 died\n", get_time_in_ms()
 		- table->start_time);
 	pthread_mutex_unlock(&table->program_stop_mutex);

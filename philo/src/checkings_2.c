@@ -12,6 +12,7 @@
 
 #include "philo.h"
 #include "unistd.h"
+
 void	print_string(t_table *table, char *str, int index)
 {
 	pthread_mutex_lock(&table->print_mutex);
@@ -32,19 +33,19 @@ void	*check_philosopher_death(void *data)
 		if (table->program_stop)
 			return (pthread_mutex_unlock(&table->program_stop_mutex), NULL);
 		pthread_mutex_unlock(&table->program_stop_mutex);
-		usleep(100);
 		index = 0;
 		while (index < table->philo_count)
 		{
+			usleep(100);
 			pthread_mutex_lock(&table->philo[index].last_meal_mutex);
 			if (get_time_in_ms() - table->philo[index].last_meal
-				> table->time_to_die)
+				>= table->time_to_die)
 			{
 				pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
 				pthread_mutex_lock(&table->program_stop_mutex);
 				table->program_stop = 1;
 				pthread_mutex_unlock(&table->program_stop_mutex);
-				print_string(table, "died", index);
+				print_string(table, "dead", index);
 				return (NULL);
 			}
 			pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
@@ -65,7 +66,6 @@ void	*check_all_philosophers_full(void *data)
 		if (table->program_stop)
 			return (pthread_mutex_unlock(&table->program_stop_mutex), NULL);
 		pthread_mutex_unlock(&table->program_stop_mutex);
-		usleep(100);
 		pthread_mutex_lock(&table->num_eats_mutex);
 		if (table->full_eats_count == table->philo_count)
 		{

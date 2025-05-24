@@ -82,7 +82,8 @@ int	validation(int argc, char **argv)
 	if (!has_only_valid_chars(argc, argv))
 		return (error_handling (INVALID_SYMBOLS), 0);
 	if (ft_atol(argv[i]) <= 0 || ft_atol(argv[i]) > 500)
-		return (error_handling (INVALID_PHILO_COUNT), 0);
-	validate_arguments(argc, argv);
+		return (error_handling(INVALID_PHILO_COUNT), 0);
+	if (validate_arguments(argc, argv) == 0)
+		return (0);
 	return (1);
 }

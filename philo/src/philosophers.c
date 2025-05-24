@@ -21,6 +21,7 @@ void	create_philos(t_table *table)
 	{
 		pthread_create(&table->philo[index].thread, NULL,
 			actions, &table->philo[index]);
+		usleep(100);
 		index++;
 	}
 }
