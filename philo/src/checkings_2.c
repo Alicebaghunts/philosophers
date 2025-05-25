@@ -30,7 +30,6 @@ static void	stop_program_action(t_table *table)
 void	*check_philosopher_death(void *data)
 {
 	t_table	*table;
-	int		index;
 
 	table = (t_table *)data;
 	while (1)
@@ -40,18 +39,18 @@ void	*check_philosopher_death(void *data)
 		if (table->program_stop)
 			return (pthread_mutex_unlock(&table->program_stop_mutex), NULL);
 		pthread_mutex_unlock(&table->program_stop_mutex);
-		index = -1;
-		while (++index < table->philo_count)
+		table->idx = -1;
+		while (++table->idx < table->philo_count)
 		{
-			pthread_mutex_lock(&table->philo[index].last_meal_mutex);
-			if (get_time_in_ms() - table->philo[index].last_meal
+			pthread_mutex_lock(&table->philo[table->idx].last_meal_mutex);
+			if (get_time_in_ms() - table->philo[table->idx].last_meal
 				>= table->time_to_die)
 			{
-				pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
+				pthread_mutex_unlock(&table->philo[table->idx].last_meal_mutex);
 				stop_program_action(table);
-				return (print_string(table, "dead", index), NULL);
+				return (print_string(table, "dead", table->idx), NULL);
 			}
-			pthread_mutex_unlock(&table->philo[index].last_meal_mutex);
+			pthread_mutex_unlock(&table->philo[table->idx].last_meal_mutex);
 		}
 	}
 	return (NULL);

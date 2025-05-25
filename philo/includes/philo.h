@@ -32,6 +32,7 @@ typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
+	int				idx;
 	int				philo_count;
 	int				time_to_die;
 	int				time_to_eat;

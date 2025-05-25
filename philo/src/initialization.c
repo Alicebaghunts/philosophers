@@ -105,6 +105,7 @@ t_table	*init_table(int argc, char **argv)
 	table->time_to_sleep = ft_atol(argv[4]);
 	table->num_eats = 0;
 	table->full_eats_count = 0;
+	table->idx = 0;
 	if (argc == 6)
 		table->num_eats = ft_atol(argv[5]);
 	table->program_stop = 0;
