@@ -19,9 +19,10 @@ void	create_philos(t_table *table)
 	index = 0;
 	while (index < table->philo_count)
 	{
-		pthread_create(&table->philo[index].thread, NULL,
-			actions, &table->philo[index]);
-		usleep(100);
+		if (pthread_create(&table->philo[index].thread, NULL,
+				actions, &table->philo[index]))
+			return ;
+		usleep(1000);
 		index++;
 	}
 }

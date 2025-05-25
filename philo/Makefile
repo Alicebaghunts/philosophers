@@ -7,7 +7,7 @@ SRC = $(shell find . -name "*.c")
 OBJ = $(SRC:.c=.o)
 
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror  -I $(INC_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) 
+CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) -I $(MLX_DIR) -I $(LIBFT_DIR) 
 RM = rm -f
 
 all: $(NAME)

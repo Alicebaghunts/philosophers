@@ -35,6 +35,7 @@ void	*check_philosopher_death(void *data)
 	table = (t_table *)data;
 	while (1)
 	{
+		usleep(100);
 		pthread_mutex_lock(&table->program_stop_mutex);
 		if (table->program_stop)
 			return (pthread_mutex_unlock(&table->program_stop_mutex), NULL);
@@ -63,6 +64,7 @@ void	*check_all_philosophers_full(void *data)
 	table = (t_table *)data;
 	while (1)
 	{
+		usleep(100);
 		pthread_mutex_lock(&table->program_stop_mutex);
 		if (table->program_stop)
 			return (pthread_mutex_unlock(&table->program_stop_mutex), NULL);
