@@ -27,18 +27,6 @@ void	philo_sleeping(t_philo *philo)
 	print_action(philo, "philo sleeping");
 	philo_usleep(philo->table->time_to_sleep);
 }
-void	action(t_philo *philo)
-{
-	// pthread_create(&philo->table->death_thread, NULL,
-	// 	check_philosopher_death, philo);
-	while (1)
-	{
-		philo_eating(philo);
-		philo_sleeping(philo);
-		philo_thinking(philo);
-	}
-	// pthread_join(philo->table->death_thread, NULL);
-}
 
 void	pick_fork(t_philo *philo)
 {

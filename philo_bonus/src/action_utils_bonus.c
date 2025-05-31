@@ -14,18 +14,18 @@
 
 void	actions(t_philo *philo)
 {
-	// pthread_create(philo->table->death_thread, NULL, ..., philo);
+	pthread_create(&philo->table->death_thread, NULL,
+		check_philosopher_death, philo);
 	while (1)
 	{
 		sem_wait(philo->last_meal_sem);
 		philo->last_meal = get_time_in_ms();
 		sem_post(philo->last_meal_sem);
 		philo_eating(philo);
-		print_action(philo, "is sleeping");
-		philo_usleep(philo->table->time_to_sleep);
-		print_action(philo, "is thinking");
+		philo_sleeping(philo);
+		philo_thinking(philo);
 	}
-	// pthread_join(philo->table->death_thread);
+	pthread_join(philo->table->death_thread, NULL);
 }
 
 void	print_action(t_philo *philo, const char *str)

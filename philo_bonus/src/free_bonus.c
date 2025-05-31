@@ -24,8 +24,8 @@ void	close_semaphores(t_table *table)
 	sem_unlink("/all_dead");
 	sem_close(table->fullness);
 	sem_unlink("/fullness");
-	sem_close(table->death);
-	sem_unlink("/death");
+	sem_close(table->stop_sem);
+	sem_unlink("/stop_sem");
 }
 
 void	free_semaphores(t_table *table)

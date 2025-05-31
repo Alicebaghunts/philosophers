@@ -21,16 +21,16 @@ int	init_semaphore(t_table *table)
 	sem_unlink("/print");
 	sem_unlink("/deadlock_protect");
 	sem_unlink("/fullness");
-	sem_unlink("/death");
+	sem_unlink("/stop_sem");
 	sem_unlink("/all_stop");
 	table->forks = sem_open("/forks", O_CREAT, 0644, table->philo_count);
 	table->print = sem_open("/print", O_CREAT, 0644, 1);
 	table->fullness = sem_open("/fullness", O_CREAT, 0644, 0);
-	table->death = sem_open("/death", O_CREAT, 0644, 0);
+	table->stop_sem = sem_open("/stop_sem", O_CREAT, 0644, 0);
 	table->all_dead_sem = sem_open("/all_stop", O_CREAT, 0644, 1);
 	table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT, 0644, 1);
 	if (table->forks == SEM_FAILED || table->print == SEM_FAILED
-		|| table->fullness == SEM_FAILED || table->death == SEM_FAILED
+		|| table->fullness == SEM_FAILED || table->stop_sem == SEM_FAILED
 		|| table->all_dead_sem == SEM_FAILED
 		|| table->deadlock_protect == SEM_FAILED)
 		return (error_handling(SEMAPHORE_INIT_ERROR), 0);

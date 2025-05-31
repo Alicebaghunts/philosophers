@@ -8,7 +8,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = cc 
 
-CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR)
 
 RM = rm -f
 

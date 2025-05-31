@@ -21,7 +21,7 @@ void    create_philo(t_table *table)
     {
         table->pid[index] = fork();
         if (table->pid[index] == 0)
-            action(&table->philo[index]);
+            actions(&table->philo[index]);
         ++index;
     }
 }

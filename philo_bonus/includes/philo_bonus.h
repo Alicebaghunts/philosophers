@@ -22,6 +22,7 @@
 # include <limits.h>
 # include <sys/time.h>
 # include <sys/wait.h>
+# include <signal.h>
 # include <semaphore.h>
 # define INVALID_ARGUMENT 1
 # define INVALID_SYMBOLS 2
@@ -58,7 +59,7 @@ typedef struct s_table
 	sem_t		*forks;
 	sem_t		*print;
 	sem_t		*fullness;
-	sem_t		*death;
+	sem_t		*stop_sem;
 	sem_t		*all_dead_sem;
 	pthread_t	fullness_thread;
 	pthread_t	death_thread;
@@ -92,15 +93,18 @@ void	delay_ms(long long ms);
 void	print_action(t_philo *philo, const char *str);
 //actions
 
-void	action(t_philo *philo);
+void	actions(t_philo *philo);
 void	pick_fork(t_philo *philo);
 void	put_fork(t_philo *philo);
-void	action(t_philo *philo);
 void	one_philo_pick_fork(t_philo *philo);
 void	philo_thinking(t_philo *philo);
 void	philo_usleep(int sleep_time);
 void	philo_eating(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
 void    create_philo(t_table *table);
+//threads
+void	*check_philosopher_death(void *data);
+void	*check_all_philosophers_full(void *data);
+
 
 #endif
