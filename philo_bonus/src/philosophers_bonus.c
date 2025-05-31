@@ -12,3 +12,16 @@
 
 #include "philo_bonus.h"
 
+void    create_philo(t_table *table)
+{
+    int index;
+
+    index = 0;
+    while (index < table->philo_count)
+    {
+        table->pid[index] = fork();
+        if (table->pid[index] == 0)
+            action(&table->philo[index]);
+        ++index;
+    }
+}

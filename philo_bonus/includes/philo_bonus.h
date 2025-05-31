@@ -21,6 +21,7 @@
 # include <pthread.h>
 # include <limits.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <semaphore.h>
 # define INVALID_ARGUMENT 1
 # define INVALID_SYMBOLS 2
@@ -53,7 +54,7 @@ typedef struct s_table
 	int			program_stop;
 	int			all_dead;
 	long long	start_time;
-	sem_t		*secure_forks;
+	sem_t		*deadlock_protect;
 	sem_t		*forks;
 	sem_t		*print;
 	sem_t		*fullness;
@@ -62,6 +63,7 @@ typedef struct s_table
 	pthread_t	fullness_thread;
 	pthread_t	death_thread;
 	t_philo		*philo;
+	pid_t		*pid;
 }	t_table;
 //validation
 int		validation(int argc, char **argv);
@@ -88,4 +90,17 @@ long	get_time_in_ms(void);
 void	delay_ms(long long ms);
 // print action
 void	print_action(t_philo *philo, const char *str);
+//actions
+
+void	action(t_philo *philo);
+void	pick_fork(t_philo *philo);
+void	put_fork(t_philo *philo);
+void	action(t_philo *philo);
+void	one_philo_pick_fork(t_philo *philo);
+void	philo_thinking(t_philo *philo);
+void	philo_usleep(int sleep_time);
+void	philo_eating(t_philo *philo);
+void	philo_sleeping(t_philo *philo);
+void    create_philo(t_table *table);
+
 #endif

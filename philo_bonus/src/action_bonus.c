@@ -12,19 +12,74 @@
 
 #include "philo_bonus.h"
 
-void	philo_pick_fork(t_philo *philo)
+void	philo_eating(t_philo *philo)
 {
-	sem_wait(philo->table->secure_forks);
-	sem_wait(philo->table->forks);
-	print_action(philo, "has taken a fork");
-	if (philo->table->philo_count == 1)
+	pick_fork(philo);
+	print_action(philo, "philo eating");
+	philo_usleep(philo->table->time_to_eat);
+	sem_wait(philo->last_meal_sem);
+	philo->last_meal = get_time_in_ms();
+	sem_post(philo->last_meal_sem);
+	put_fork(philo);
+}
+void	philo_sleeping(t_philo *philo)
+{
+	print_action(philo, "philo sleeping");
+	philo_usleep(philo->table->time_to_sleep);
+}
+void	action(t_philo *philo)
+{
+	// pthread_create(&philo->table->death_thread, NULL,
+	// 	check_philosopher_death, philo);
+	while (1)
 	{
-		sem_post(philo->table->forks);
-		sem_post(philo->table->secure_forks);
-		usleep((philo->table->time_to_die + 2) * 1000);
-		sem_post(philo->table->death);
+		philo_eating(philo);
+		philo_sleeping(philo);
+		philo_thinking(philo);
 	}
-	sem_wait(philo->table->forks);
-	print_state(philo, "has taken a fork");
+	// pthread_join(philo->table->death_thread, NULL);
 }
 
+void	pick_fork(t_philo *philo)
+{
+	sem_wait(philo->table->deadlock_protect);
+	sem_wait(philo->table->forks);
+	print_action(philo, "has taken a fork");
+	sem_wait(philo->table->forks);
+	print_action(philo, "has taken a fork");
+}
+
+void	put_fork(t_philo *philo)
+{
+	sem_post(philo->table->forks);
+	sem_post(philo->table->forks);
+	sem_post(philo->table->deadlock_protect);
+}
+void	one_philo_pick_fork(t_philo *philo)
+{
+	sem_wait(philo->table->deadlock_protect);
+	sem_wait(philo->table->forks);
+	print_action(philo, "has taken a fork");
+	usleep((philo->table->time_to_die + 1) * 1000);
+	sem_post(philo->table->forks);
+	sem_post(philo->table->deadlock_protect);
+}
+
+void	philo_usleep(int sleep_time)
+{
+	long	start;
+	long	current;
+
+	start = get_time_in_ms();
+	while (1)
+	{
+		current = get_time_in_ms();
+		if (current - start >= sleep_time)
+			break ;
+		usleep(100);
+	}
+}
+void	philo_thinking(t_philo *philo)
+{
+	print_action(philo, "philo thinking");
+}
