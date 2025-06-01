@@ -61,8 +61,10 @@ typedef struct s_table
 	sem_t		*fullness;
 	sem_t		*stop_sem;
 	sem_t		*all_dead_sem;
+	sem_t		*death;
 	pthread_t	fullness_thread;
 	pthread_t	death_thread;
+	pthread_t	monitoring_thread;
 	t_philo		*philo;
 	pid_t		*pid;
 }	t_table;
@@ -103,8 +105,11 @@ void	philo_eating(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
 void    create_philo(t_table *table);
 //threads
-void	*check_philosopher_death(void *data);
-void	*check_all_philosophers_full(void *data);
 
+void    *death_monitor(void *data);
+void	*check_death_philo(void *data);
+void	*fullness_philos(void *data);
+
+void    create_threads(t_table *table);
 
 #endif

@@ -15,9 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_table	*table;
-	int		index;
 
-	index = 0;
 	if (validation(argc, argv) == 0)
 		return (0);
 	table = init_table(argc, argv);
@@ -25,6 +23,7 @@ int	main(int argc, char **argv)
 		return (one_philo_pick_fork(&table->philo[0]), free_table(table), 0);
 	table->start_time = get_time_in_ms();
 	create_philo(table);
+	create_threads(table);
 	free_table(table);
 	while (wait(NULL) != -1)
 		;
