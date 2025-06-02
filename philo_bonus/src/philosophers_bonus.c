@@ -3,25 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <alisharu@student.42.fr>          #+#  +:+       +#+        */
+/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-05-29 16:39:31 by alisharu          #+#    #+#             */
-/*   Updated: 2025-05-29 16:39:31 by alisharu         ###   ########.fr       */
+/*   Created: 2025/05/29 16:39:31 by alisharu          #+#    #+#             */
+/*   Updated: 2025/06/02 21:48:25 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void    create_philo(t_table *table)
+void	handle_signal(int signum)
 {
-    int index;
+	if (signum == SIGTERM)
+	{
+		printf("aaa\n");
+		exit(0);
+	}
+}
 
-    index = 0;
-    while (index < table->philo_count)
-    {
-        table->pid[index] = fork();
-        if (table->pid[index] == 0)
-            actions(&table->philo[index]);
-        ++index;
-    }
+void	create_philo(t_table *table)
+{
+	int	index;
+
+	index = 0;
+	while (index < table->philo_count)
+	{
+		table->pid[index] = fork();
+		if (table->pid[index] == 0)
+		{
+			signal(SIGTERM, handle_signal);
+			actions(&table->philo[index]);
+		}
+		++index;
+	}
 }

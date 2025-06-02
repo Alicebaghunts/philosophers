@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <alisharu@student.42.fr>          #+#  +:+       +#+        */
+/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-05-29 14:56:59 by alisharu          #+#    #+#             */
-/*   Updated: 2025-05-29 14:56:59 by alisharu         ###   ########.fr       */
+/*   Created: 2025/05/29 14:56:59 by alisharu          #+#    #+#             */
+/*   Updated: 2025/06/02 18:34:54 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ void	*check_death_philo(void *data);
 void	*fullness_philos(void *data);
 
 void    create_threads(t_table *table);
+void	handle_sigterm(int sig);
 
 #endif

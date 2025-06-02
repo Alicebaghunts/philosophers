@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_bonus.c                                     :+:      :+:    :+:   */
+/*   action_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <alisharu@student.42.fr>          #+#  +:+       +#+        */
+/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-05-29 16:41:42 by alisharu          #+#    #+#             */
-/*   Updated: 2025-05-29 16:41:42 by alisharu         ###   ########.fr       */
+/*   Created: 2025/05/29 16:41:42 by alisharu          #+#    #+#             */
+/*   Updated: 2025/06/02 21:54:17 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
+ls
 void	actions(t_philo *philo)
 {
 	pthread_create(&philo->table->monitoring_thread,
-			NULL, check_death_philo, philo);
+		NULL, check_death_philo, philo);
 	while (1)
 	{
 		philo_eating(philo);
 		philo_sleeping(philo);
 		philo_thinking(philo);
 		sem_wait(philo->table->stop_sem);
-		if (philo->table->program_stop)
-		{
-			sem_post(philo->table->stop_sem);
-			break;
-		}
-		sem_post(philo->table->stop_sem);
 	}
 	pthread_join(philo->table->monitoring_thread, NULL);
 }
