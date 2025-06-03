@@ -40,7 +40,6 @@ typedef struct s_philo
 	long long	last_meal;
 	sem_t		*last_meal_sem;
 	pthread_t	philo_death_thread;
-	pid_t		pid;
 	t_table		*table;
 }	t_philo;
 

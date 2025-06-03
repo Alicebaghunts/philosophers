@@ -12,15 +12,6 @@
 
 #include "philo_bonus.h"
 
-void	handle_signal(int signum)
-{
-	if (signum == SIGTERM)
-	{
-		printf("aaa\n");
-		exit(0);
-	}
-}
-
 void	create_philo(t_table *table)
 {
 	int	index;
@@ -30,10 +21,7 @@ void	create_philo(t_table *table)
 	{
 		table->pid[index] = fork();
 		if (table->pid[index] == 0)
-		{
-			signal(SIGTERM, handle_signal);
 			actions(&table->philo[index]);
-		}
 		++index;
 	}
 }

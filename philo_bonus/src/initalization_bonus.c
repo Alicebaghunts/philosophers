@@ -29,7 +29,7 @@ int	init_semaphore(t_table *table)
 	table->fullness = sem_open("/fullness", O_CREAT, 0644, 0);
 	table->stop_sem = sem_open("/stop_sem", O_CREAT, 0644, 0);
 	table->all_dead_sem = sem_open("/all_stop", O_CREAT, 0644, 1);
-	table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT, 0644, table->philo_count / 2);
+	table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT, 0644, table->philo_count / 2 + 1);
 	table->death = sem_open("/death", O_CREAT, 0644, 0);
 	if (table->forks == SEM_FAILED || table->print == SEM_FAILED
 		|| table->fullness == SEM_FAILED || table->stop_sem == SEM_FAILED

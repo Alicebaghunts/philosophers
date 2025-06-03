@@ -32,7 +32,7 @@ void	*death_monitor(void *data)
 	sem_wait(table->death);
 	i = -1;
 	while (++i < table->philo_count)
-		kill(table->philo[i].pid, SIGTERM);
+		kill(table->pid[i], SIGKILL);
 	sem_wait(table->all_dead_sem);
 	table->all_dead = 1;
 	sem_post(table->all_dead_sem);

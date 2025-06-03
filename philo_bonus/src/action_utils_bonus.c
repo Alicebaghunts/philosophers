@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-ls
+
 void	actions(t_philo *philo)
 {
 	pthread_create(&philo->table->monitoring_thread,
@@ -21,7 +21,6 @@ void	actions(t_philo *philo)
 		philo_eating(philo);
 		philo_sleeping(philo);
 		philo_thinking(philo);
-		sem_wait(philo->table->stop_sem);
 	}
 	pthread_join(philo->table->monitoring_thread, NULL);
 }
