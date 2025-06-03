@@ -21,7 +21,7 @@ void	close_semaphores(t_table *table)
 	sem_close(table->print);
 	sem_unlink("/print");
 	sem_close(table->all_dead_sem);
-	sem_unlink("/all_dead");
+	sem_unlink("/all_dead_sem");
 	sem_close(table->fullness);
 	sem_unlink("/fullness");
 	sem_close(table->stop_sem);
@@ -51,9 +51,12 @@ void	free_table(t_table *table)
 {
 	if (!table)
 		return ;
-	free(table->pid);
+	if (table->pid)
+		free(table->pid);
 	free_semaphores(table);
+	close_semaphores(table);
 	if (table->philo)
 		free(table->philo);
-	free(table);
+	if (table)
+		free(table);
 }

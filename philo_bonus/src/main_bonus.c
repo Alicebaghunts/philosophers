@@ -24,8 +24,9 @@ int	main(int argc, char **argv)
 	table->start_time = get_time_in_ms();
 	create_philo(table);
 	create_threads(table);
-	free_table(table);
 	while (wait(NULL) != -1)
 		;
+	sem_post(table->print);
+	free_table(table);
 	return (0);
 }

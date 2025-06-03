@@ -27,9 +27,14 @@ int	init_semaphore(t_table *table)
 	table->forks = sem_open("/forks", O_CREAT, 0644, table->philo_count);
 	table->print = sem_open("/print", O_CREAT, 0644, 1);
 	table->fullness = sem_open("/fullness", O_CREAT, 0644, 0);
-	table->stop_sem = sem_open("/stop_sem", O_CREAT, 0644, 0);
+	table->stop_sem = sem_open("/stop_sem", O_CREAT, 0644, 1);
 	table->all_dead_sem = sem_open("/all_stop", O_CREAT, 0644, 1);
-	table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT, 0644, table->philo_count / 2 + 1);
+	if (table->philo_count == 1)
+		table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT | O_EXCL,
+			0644, 1);
+	else
+		table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT | O_EXCL,
+			0644, table->philo_count / 2);
 	table->death = sem_open("/death", O_CREAT, 0644, 0);
 	if (table->forks == SEM_FAILED || table->print == SEM_FAILED
 		|| table->fullness == SEM_FAILED || table->stop_sem == SEM_FAILED
@@ -48,14 +53,16 @@ int	init_philo(t_table *table)
 	index = 0;
 	table->philo = ft_calloc(table->philo_count, sizeof(t_philo));
 	if (table->philo == NULL)
-		return (error_handling(CALLOC_ERROR), 0);
+		return (free_table(table), error_handling(CALLOC_ERROR), 0);
+	table->pid = ft_calloc(table->philo_count, sizeof(pid_t));
+	if (table->pid == NULL)
+		return (free_table(table), error_handling(CALLOC_ERROR), 0);
 	while (index < table->philo_count)
 	{
 		table->philo[index].index = index + 1;
 		table->philo[index].eat_count = 0;
 		table->philo[index].last_meal = get_time_in_ms();
 		table->philo[index].table = table;
-		table->pid = ft_calloc(table->philo_count, sizeof(pid_t));
 		semaphore_name = ft_itoa(index);
 		sem_unlink(semaphore_name);
 		table->philo[index].last_meal_sem
