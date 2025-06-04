@@ -46,7 +46,6 @@ void	free_semaphores(t_table *table)
 	}
 }
 
-
 void	free_table(t_table *table)
 {
 	if (!table)
@@ -59,4 +58,27 @@ void	free_table(t_table *table)
 		free(table->philo);
 	if (table)
 		free(table);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned char	*ptr;
+	size_t			len;
+	size_t			i;
+
+	len = size * count;
+	if (len == 0)
+		return (malloc(1));
+	if (len / size != count)
+		return (NULL);
+	ptr = (unsigned char *)malloc(len * sizeof(char));
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return ((void *)ptr);
 }

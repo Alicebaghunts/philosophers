@@ -19,7 +19,7 @@ static int	is_valid_number(char *str)
 
 	i = 0;
 	len = 0;
-	while (str[i] == 0)
+	while (str[i] == '0')
 		i++;
 	while (str[i])
 	{

@@ -12,6 +12,22 @@
 
 #include "philo_bonus.h"
 
+void	pick_fork(t_philo *philo)
+{
+	sem_wait(philo->table->deadlock_protect);
+	sem_wait(philo->table->forks);
+	print_action(philo, "has taken a fork");
+	sem_wait(philo->table->forks);
+	print_action(philo, "has taken a fork");
+}
+
+void	put_fork(t_philo *philo)
+{
+	sem_post(philo->table->forks);
+	sem_post(philo->table->forks);
+	sem_post(philo->table->deadlock_protect);
+}
+
 void	philo_eating(t_philo *philo)
 {
 	pick_fork(philo);
@@ -30,34 +46,6 @@ void	philo_sleeping(t_philo *philo)
 {
 	print_action(philo, "philo sleeping");
 	philo_usleep(philo->table->time_to_sleep);
-}
-
-void	pick_fork(t_philo *philo)
-{
-	sem_wait(philo->table->deadlock_protect);
-	sem_wait(philo->table->forks);
-	print_action(philo, "has taken a fork");
-	sem_wait(philo->table->forks);
-	print_action(philo, "has taken a fork");
-}
-
-void	put_fork(t_philo *philo)
-{
-	sem_post(philo->table->forks);
-	sem_post(philo->table->forks);
-	sem_post(philo->table->deadlock_protect);
-}
-
-void	one_philo_pick_fork(t_philo *philo)
-{
-	sem_wait(philo->table->deadlock_protect);
-	sem_wait(philo->table->forks);
-	print_action(philo, "has taken a fork");
-	usleep((philo->table->time_to_die + 1) * 1000);
-	print_action(philo, "is dead");
-	sem_post(philo->table->death);
-	sem_post(philo->table->forks);
-	sem_post(philo->table->deadlock_protect);
 }
 
 void	philo_thinking(t_philo *philo)

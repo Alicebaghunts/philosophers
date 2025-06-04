@@ -15,15 +15,15 @@
 void	error_handling(int num)
 {
 	if (num == 1)
-		printf("❌ \033[31mError: Invalid argument\e[0m\n");
+		printf("\033[31mError: Invalid argument\e[0m\n");
 	else if (num == 2)
-		printf("❌ \033[31mError: Invalid symbols\e[0m\n");
+		printf("\033[31mError: Invalid symbols\e[0m\n");
 	else if (num == 3)
-		printf("❌ \033[31mError: Invalid philosopher count\e[0m\n");
+		printf("\033[31mError: Invalid philosopher count\e[0m\n");
 	else if (num == 4)
-		printf("❌ \033[31mError: Isn't valid number\e[0m\n");
+		printf("\033[31mError: Isn't valid number\e[0m\n");
 	else if (num == 5)
-		printf("❌ \033[31mError: Could't calloc memory\e[0m\n");
+		printf("\033[31mError: Could't calloc memory\e[0m\n");
 }
 
 int	ft_strlen(const char *s)
@@ -63,6 +63,8 @@ long	ft_atol(const char *str)
 			sign = -1;
 		i++;
 	}
+	while (str[i] != '\0' && str[i] == '0')
+		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + (str[i] - '0');

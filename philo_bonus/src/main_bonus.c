@@ -26,7 +26,8 @@ int	main(int argc, char **argv)
 	create_threads(table);
 	while (wait(NULL) != -1)
 		;
-	sem_post(table->print);
+	if (argc == 6)
+		sem_post(table->print);
 	free_table(table);
 	return (0);
 }

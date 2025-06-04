@@ -15,17 +15,17 @@
 void	error_handling(int num)
 {
 	if (num == 1)
-		printf("❌ \033[31mError: Invalid argument\e[0m\n");
+		printf("\033[31mError: Invalid argument\e[0m\n");
 	else if (num == 2)
-		printf("❌ \033[31mError: Invalid symbols\e[0m\n");
+		printf("\033[31mError: Invalid symbols\e[0m\n");
 	else if (num == 3)
-		printf("❌ \033[31mError: Invalid philosopher count\e[0m\n");
+		printf("\033[31mError: Invalid philosopher count\e[0m\n");
 	else if (num == 4)
-		printf("❌ \033[31mError: Isn't valid number\e[0m\n");
+		printf("\033[31mError: Isn't valid number\e[0m\n");
 	else if (num == 5)
-		printf("❌ \033[31mError: Could't calloc memory\e[0m\n");
+		printf("\033[31mError: Could't calloc memory\e[0m\n");
 	else if (num == 6)
-		printf("❌ \033[31mError: Could't init semaphore\e[0m\n");
+		printf("\033[31mError: Could't init semaphore\e[0m\n");
 }
 
 int	ft_strlen(const char *s)
@@ -36,16 +36,6 @@ int	ft_strlen(const char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	len;
-
-	if (!s)
-		return ;
-	len = ft_strlen(s);
-	write(fd, s, len);
 }
 
 long	ft_atol(const char *str)
@@ -73,26 +63,42 @@ long	ft_atol(const char *str)
 	return (result * sign);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_strdup(char *src)
 {
-	unsigned char	*ptr;
-	size_t			len;
-	size_t			i;
+	char	*s;
+	int		i;
 
-	len = size * count;
-	if (len == 0)
-		return (malloc(1));
-	if (len / size != count)
-		return (NULL);
-	ptr = (unsigned char *)malloc(len * sizeof(char));
-	if (!ptr)
+	s = (char *)malloc((ft_strlen(src) + 1) * sizeof(char));
+	if (!s)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (src && src[i])
 	{
-		ptr[i] = 0;
-		i++;
+		s[i] = src[i];
+		++i;
 	}
-	return ((void *)ptr);
+	s[i] = 0;
+	return (s);
 }
 
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	if (start >= (unsigned int)ft_strlen(s))
+		return (ft_strdup(""));
+	str = (char *)malloc((get_malloc_size(s, start, len) + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len && s[start + i])
+	{
+		str[i] = s[start + i];
+		++i;
+	}
+	str[i] = '\0';
+	return (str);
+}

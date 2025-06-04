@@ -10,10 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <semaphore.h>
-#include <unistd.h>
 #include "philo_bonus.h"
+
+static void	dedlock_proteckt_init(t_table *table)
+{
+	if (table->philo_count == 1)
+		table->deadlock_protect = sem_open("/deadlock_protect",
+				O_CREAT | O_EXCL, 0644, 1);
+	else
+		table->deadlock_protect = sem_open("/deadlock_protect",
+				O_CREAT | O_EXCL, 0644, table->philo_count / 2);
+}
 
 int	init_semaphore(t_table *table)
 {
@@ -29,13 +36,8 @@ int	init_semaphore(t_table *table)
 	table->fullness = sem_open("/fullness", O_CREAT, 0644, 0);
 	table->stop_sem = sem_open("/stop_sem", O_CREAT, 0644, 1);
 	table->all_dead_sem = sem_open("/all_stop", O_CREAT, 0644, 1);
-	if (table->philo_count == 1)
-		table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT | O_EXCL,
-			0644, 1);
-	else
-		table->deadlock_protect = sem_open("/deadlock_protect", O_CREAT | O_EXCL,
-			0644, table->philo_count / 2);
 	table->death = sem_open("/death", O_CREAT, 0644, 0);
+	dedlock_proteckt_init(table);
 	if (table->forks == SEM_FAILED || table->print == SEM_FAILED
 		|| table->fullness == SEM_FAILED || table->stop_sem == SEM_FAILED
 		|| table->all_dead_sem == SEM_FAILED
@@ -96,4 +98,3 @@ t_table	*init_table(int argc, char **argv)
 	table->start_time = get_time_in_ms();
 	return (table);
 }
-

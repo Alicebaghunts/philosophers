@@ -17,7 +17,6 @@ void	create_threads(t_table *table)
 	pthread_create(&table->death_thread, NULL, death_monitor, table);
 	if (table->num_eats_count > 0)
 		pthread_create(&table->fullness_thread, NULL, fullness_philos, table);
-
 	pthread_join(table->death_thread, NULL);
 	if (table->num_eats_count > 0)
 		pthread_join(table->fullness_thread, NULL);
@@ -95,11 +94,8 @@ void	*fullness_philos(void *data)
 			sem_wait(table->print);
 			printf("[%lld] Dinner is over\n",
 				get_time_in_ms() - table->start_time);
-			sem_post(table->death);
-			return (NULL);
+			return (sem_post(table->death), NULL);
 		}
 	}
 	return (NULL);
 }
-
-

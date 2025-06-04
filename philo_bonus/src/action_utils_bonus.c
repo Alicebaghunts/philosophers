@@ -39,3 +39,15 @@ void	print_action(t_philo *philo, const char *str)
 		- philo->table->start_time, philo->index, str);
 	sem_post(philo->table->print);
 }
+
+void	one_philo_pick_fork(t_philo *philo)
+{
+	sem_wait(philo->table->deadlock_protect);
+	sem_wait(philo->table->forks);
+	print_action(philo, "has taken a fork");
+	usleep((philo->table->time_to_die + 1) * 1000);
+	print_action(philo, "is dead");
+	sem_post(philo->table->death);
+	sem_post(philo->table->forks);
+	sem_post(philo->table->deadlock_protect);
+}

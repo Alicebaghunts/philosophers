@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <semaphore.h>
+# include <fcntl.h>
 # define INVALID_ARGUMENT 1
 # define INVALID_SYMBOLS 2
 # define INVALID_PHILO_COUNT 3
@@ -31,7 +32,7 @@
 # define CALLOC_ERROR 5
 # define SEMAPHORE_INIT_ERROR 6
 
-typedef struct s_table t_table;
+typedef struct s_table	t_table;
 
 typedef struct s_philo
 {
@@ -76,9 +77,10 @@ int		has_only_valid_chars(int argc, char **argv);
 //libft function
 char	*ft_itoa(int n);
 long	ft_atol(const char *str);
-void	ft_putstr_fd(char *s, int fd);
 int		ft_strlen(const char *s);
 void	*ft_calloc(size_t count, size_t size);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		get_malloc_size(char const *s, unsigned int start, size_t len);
 void	error_handling(int num);
 //initalization
 t_table	*init_table(int argc, char **argv);
@@ -102,14 +104,14 @@ void	philo_thinking(t_philo *philo);
 void	philo_usleep(int sleep_time);
 void	philo_eating(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
-void    create_philo(t_table *table);
+void	create_philo(t_table *table);
 //threads
 
-void    *death_monitor(void *data);
+void	*death_monitor(void *data);
 void	*check_death_philo(void *data);
 void	*fullness_philos(void *data);
 
-void    create_threads(t_table *table);
+void	create_threads(t_table *table);
 void	handle_sigterm(int sig);
 
 #endif
