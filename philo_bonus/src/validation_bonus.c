@@ -12,7 +12,7 @@
 
 #include "philo_bonus.h"
 
-int	is_valid_number(char *str)
+static int	is_valid_number(char *str)
 {
 	int	i;
 	int	len;
@@ -33,12 +33,12 @@ int	is_valid_number(char *str)
 	return (0);
 }
 
-int	ft_isdigit(int ch)
+static int	ft_isdigit(int ch)
 {
 	return (ch >= '0' && ch <= '9');
 }
 
-int	has_only_valid_chars(int argc, char **argv)
+static int	has_only_valid_chars(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -46,12 +46,16 @@ int	has_only_valid_chars(int argc, char **argv)
 	i = 0;
 	while (++i < argc)
 	{
-		j = -1;
-		while (argv[i][++j])
+		j = 0;
+		if ((argv[i][j] == '+' || argv[i][j] == '-') && argv[i][j + 1])
+			j++;
+		if (!argv[i][j])
+			return (0);
+		while (argv[i][j])
 		{
-			if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' '
-				&& argv[i][j] != '+' && argv[i][j] != '-')
+			if (!ft_isdigit(argv[i][j]))
 				return (0);
+			j++;
 		}
 	}
 	return (1);

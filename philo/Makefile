@@ -23,7 +23,8 @@ OBJS            = $(patsubst $(SRC)/%.c,$(BUILD)/%.o,$(SRCS))
 
 CC              = cc
 
-CFLAGS          = -Wall -Wextra -Werror -pthread -Iincludes
+CFLAGS = -Wall -Wextra -Werror -Iincludes
+
 
 RESET           = \033[0m
 PURPLE          = \033[0;35m
@@ -73,21 +74,21 @@ re: fclean all
 
 help :
 	@echo
-	@echo "${LIGHT_PURPLE} make help ${RESET}"
-	@echo "$(PURPLE)------------------------------------------------------------------$(RESET)"
-	@echo "$(PURPLE)| $(LIGHT_PURPLE)Cases$(LIGHT_PURPLE)         $(PURPLE)|$(PURPLE) $(PURPLE)./philo  $(PURPLE)$(PURPLE)                			 |$(PURPLE)$(RESET)"
-	@echo "$(PURPLE)------------------------------------------------------------------$(RESET)"
-	@echo "$(PURPLE)|         	$(PURPLE)|$(PURPLE) $(PURPLE)1. ./philo 2 800 200 200 $(PURPLE)                      $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)|         	$(PURPLE)|$(PURPLE) $(PURPLE)2. ./philo 4 410 200 200 $(PURPLE)                      $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)| $(LIGHT_PURPLE)Valid$(LIGHT_PURPLE)         $(PURPLE)|$(PURPLE) $(PURPLE)3. ./philo 5 800 200 200 $(PURPLE)                      $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)| $(LIGHT_PURPLE)Shouldn't die$(LIGHT_PURPLE) $(PURPLE)|$(PURPLE) $(PURPLE)4. ./philo 10 700 200 100 $(PURPLE)                     $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)|         	$(PURPLE)|$(PURPLE) $(PURPLE)5. ./philo 200 800 200 200 $(PURPLE)                    $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)------------------------------------------------------------------$(RESET)"
-	@echo "$(PURPLE)|         	$(PURPLE)|$(PURPLE) $(PURPLE)1. ./philo 1 800 200 200 $(PURPLE)                      $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)|         	$(PURPLE)|$(PURPLE) $(PURPLE)2. ./philo 4 400 200 200 $(PURPLE)                      $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)| $(LIGHT_PURPLE)Invalid$(LIGHT_PURPLE)       $(PURPLE)|$(PURPLE) $(PURPLE)3. ./philo 5 800 200 200 $(PURPLE)                      $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)| $(LIGHT_PURPLE)Should die$(LIGHT_PURPLE)    $(PURPLE)|$(PURPLE) $(PURPLE)4. ./philo 3 310 200 100 $(PURPLE)                      $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)|         	$(PURPLE)|$(PURPLE) $(PURPLE)5. ./philo 200 500 200 100 $(PURPLE)                    $(PURPLE)|$(PURPLE) $(RESET)"
-	@echo "$(PURPLE)------------------------------------------------------------------$(RESET)"
+	@echo "${CYAN} make help ${RESET}"
+	@echo "$(BLUE)------------------------------------------------------------------$(RESET)"
+	@echo "$(BLUE)| $(CYAN)Cases$(CYAN)         $(BLUE)|$(BLUE) $(BLUE)./philo  $(BLUE)$(BLUE)                			 |$(BLUE)$(RESET)"
+	@echo "$(BLUE)------------------------------------------------------------------$(RESET)"
+	@echo "$(BLUE)|         	$(BLUE)|$(BLUE) $(BLUE)1. ./philo 2 800 200 200 $(BLUE)                      $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)|         	$(BLUE)|$(BLUE) $(BLUE)2. ./philo 4 410 200 200 $(BLUE)                      $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)| $(CYAN)Valid$(CYAN)         $(BLUE)|$(BLUE) $(BLUE)3. ./philo 5 800 200 200 $(BLUE)                      $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)| $(CYAN)Shouldn't die$(CYAN) $(BLUE)|$(BLUE) $(BLUE)4. ./philo 10 700 200 100 $(BLUE)                     $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)|         	$(BLUE)|$(BLUE) $(BLUE)5. ./philo 200 800 200 200 $(BLUE)                    $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)------------------------------------------------------------------$(RESET)"
+	@echo "$(BLUE)|         	$(BLUE)|$(BLUE) $(BLUE)1. ./philo 1 800 200 200 $(BLUE)                      $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)|         	$(BLUE)|$(BLUE) $(BLUE)2. ./philo 4 400 200 200 $(BLUE)                      $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)| $(CYAN)Invalid$(CYAN)       $(BLUE)|$(BLUE) $(BLUE)3. ./philo 5 800 200 200 $(BLUE)                      $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)| $(CYAN)Should die$(CYAN)    $(BLUE)|$(BLUE) $(BLUE)4. ./philo 3 310 200 100 $(BLUE)                      $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)|         	$(BLUE)|$(BLUE) $(BLUE)5. ./philo 200 500 200 100 $(BLUE)                    $(BLUE)|$(BLUE) $(RESET)"
+	@echo "$(BLUE)------------------------------------------------------------------$(RESET)"
 
 .PHONY: all clean fclean help re

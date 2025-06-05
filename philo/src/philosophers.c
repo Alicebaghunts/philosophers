@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alisharu <alisharu@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:47:37 by alisharu          #+#    #+#             */
-/*   Updated: 2025/05/21 12:51:40 by alisharu         ###   ########.fr       */
+/*   Created: 2025-06-05 13:53:31 by alisharu          #+#    #+#             */
+/*   Updated: 2025-06-05 13:53:31 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	create_philos(t_table *table)
 		if (pthread_create(&table->philo[index].thread, NULL,
 				actions, &table->philo[index]))
 			return ;
-		usleep(1000);
+		usleep(250);
 		index++;
 	}
 }

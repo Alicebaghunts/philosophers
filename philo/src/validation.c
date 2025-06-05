@@ -46,12 +46,16 @@ static int	has_only_valid_chars(int argc, char **argv)
 	i = 0;
 	while (++i < argc)
 	{
-		j = -1;
-		while (argv[i][++j])
+		j = 0;
+		if ((argv[i][j] == '+' || argv[i][j] == '-') && argv[i][j + 1])
+			j++;
+		if (!argv[i][j])
+			return (0);
+		while (argv[i][j])
 		{
-			if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' '
-				&& argv[i][j] != '+' && argv[i][j] != '-')
+			if (!ft_isdigit(argv[i][j]))
 				return (0);
+			j++;
 		}
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alisharu <alisharu@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 14:56:59 by alisharu          #+#    #+#             */
-/*   Updated: 2025/06/02 18:34:54 by alisharu         ###   ########.fr       */
+/*   Created: 2025-06-05 13:54:12 by alisharu          #+#    #+#             */
+/*   Updated: 2025-06-05 13:54:12 by alisharu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,10 @@ typedef struct s_table
 	t_philo		*philo;
 	pid_t		*pid;
 }	t_table;
-//validation
+
+t_table	*init_table(int argc, char **argv);
 int		validation(int argc, char **argv);
 int		validate_arguments(int argc, char **argv);
-int		ft_isdigit(int ch);
-int		is_valid_number(char *str);
-int		has_only_valid_chars(int argc, char **argv);
-//libft function
 char	*ft_itoa(int n);
 long	ft_atol(const char *str);
 int		ft_strlen(const char *s);
@@ -82,20 +79,13 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		get_malloc_size(char const *s, unsigned int start, size_t len);
 void	error_handling(int num);
-//initalization
-t_table	*init_table(int argc, char **argv);
 int		init_philo(t_table *table);
 int		init_semaphore(t_table *table);
-//free
 void	free_table(t_table *table);
 void	free_semaphores(t_table *table);
-//timing
 long	get_time_in_ms(void);
 void	delay_ms(long long ms);
-// print action
 void	print_action(t_philo *philo, const char *str);
-//actions
-
 void	actions(t_philo *philo);
 void	pick_fork(t_philo *philo);
 void	put_fork(t_philo *philo);
@@ -105,12 +95,9 @@ void	philo_usleep(int sleep_time);
 void	philo_eating(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
 void	create_philo(t_table *table);
-//threads
-
 void	*death_monitor(void *data);
 void	*check_death_philo(void *data);
 void	*fullness_philos(void *data);
-
 void	create_threads(t_table *table);
 void	handle_sigterm(int sig);
 
