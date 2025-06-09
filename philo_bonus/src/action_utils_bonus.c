@@ -17,11 +17,14 @@ void	actions(t_philo *philo)
 {
 	pthread_create(&philo->table->monitoring_thread,
 		NULL, check_death_philo, philo);
+	if (philo->index % 2 == 0)
+		usleep(500);
 	while (1)
 	{
 		philo_eating(philo);
-		philo_sleeping(philo);
-		philo_thinking(philo);
+		print_action(philo, "philo sleeping");
+		philo_usleep(philo->table->time_to_sleep);
+		print_action(philo, "philo thinking");
 	}
 	pthread_join(philo->table->monitoring_thread, NULL);
 }

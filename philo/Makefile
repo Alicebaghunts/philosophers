@@ -23,7 +23,7 @@ OBJS            = $(patsubst $(SRC)/%.c,$(BUILD)/%.o,$(SRCS))
 
 CC              = cc
 
-CFLAGS = -Wall -Wextra -Werror -Iincludes
+CFLAGS = -Wall -Wextra -Werror -Iincludes -g
 
 
 RESET           = \033[0m

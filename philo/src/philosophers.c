@@ -16,14 +16,13 @@ void	create_philos(t_table *table)
 {
 	int	index;
 
-	index = 0;
-	while (index < table->philo_count)
+	index = -1;
+	while (++index < table->philo_count)
 	{
 		if (pthread_create(&table->philo[index].thread, NULL,
 				actions, &table->philo[index]))
 			return ;
-		usleep(250);
-		index++;
+		usleep(500);
 	}
 }
 

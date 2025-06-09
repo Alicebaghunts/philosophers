@@ -30,6 +30,9 @@ void	*actions(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
+	pthread_mutex_lock(&philo->last_meal_mutex);
+	philo->last_meal = get_time_in_ms();
+	pthread_mutex_unlock(&philo->last_meal_mutex);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->table->program_stop_mutex);

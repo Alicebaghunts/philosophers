@@ -32,18 +32,9 @@ void	*death_monitor(void *data)
 	sem_wait(table->stop_sem);
 	if (table->program_stop)
 		return (sem_post(table->stop_sem), NULL);
-	sem_post(table->stop_sem);
 	i = -1;
 	while (++i < table->philo_count)
 		kill(table->pid[i], SIGKILL);
-	sem_wait(table->stop_sem);
-	table->program_stop = 1;
-	sem_post(table->stop_sem);
-	sem_wait(table->all_dead_sem);
-	table->all_dead = 1;
-	sem_post(table->all_dead_sem);
-	if (table->num_eats_count)
-		sem_post(table->fullness);
 	return (NULL);
 }
 

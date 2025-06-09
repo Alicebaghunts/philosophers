@@ -23,7 +23,7 @@ SRCS            = $(SRC)/action_bonus.c \
 OBJS            = $(patsubst $(SRC)/%.c,$(BUILD)/%.o,$(SRCS))
 
 CC              = cc
-CFLAGS          = -Wall -Wextra -Werror -pthread -Iincludes
+CFLAGS          = -Wall -Wextra -Werror -pthread -Iincludes -g3
 
 RESET           = \033[0m
 PURPLE          = \033[0;35m
