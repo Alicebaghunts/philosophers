@@ -24,5 +24,5 @@ They must:
 ## Demo Video
 ## Demo
 
-![Screen Recording](assets/screen-recording.gif)
+![Screen Recording](/Users/alicebaghunts/Desktop/Screen Recording.gif)
 
