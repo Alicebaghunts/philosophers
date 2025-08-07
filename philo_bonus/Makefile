@@ -60,7 +60,6 @@ $(NAME): $(OBJS)
 	@echo "$(PURPLE)| $(LIGHT_PURPLE)Help$(LIGHT_PURPLE)          $(PURPLE)|$(PURPLE) $(PURPLE)make help$(PURPLE)                                      $(PURPLE)|$(PURPLE) $(RESET)"
 	@echo "$(PURPLE)------------------------------------------------------------------$(RESET)"
 
-
 clean:
 	@rm -rf $(BUILD)
 	@echo "${RED}Build files cleaned.${RESET}"

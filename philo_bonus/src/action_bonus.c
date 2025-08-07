@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alisharu <alisharu@student.42.fr>          #+#  +:+       +#+        */
+/*   By: alicebaghunts <alicebaghunts@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-05 13:52:51 by alisharu          #+#    #+#             */
-/*   Updated: 2025-06-05 13:52:51 by alisharu         ###   ########.fr       */
+/*   Created: 2025/06/05 13:52:52 by alisharu          #+#    #+#             */
+/*   Updated: 2025/08/07 15:16:38 by alicebaghun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
