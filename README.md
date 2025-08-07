@@ -14,11 +14,14 @@ They must:
 * Repeat...
 
 <img src="https://github.com/user-attachments/assets/96c6bd24-f769-4680-8413-be5bc80270bd" alt="Philosopher Diagram" width="450"/>
-<img src="https://github.com/user-attachments/assets/a3d8602b-c308-43f4-a8e4-4f947d9dd53a" alt="Philosopher Diagram" width="450"/>
 
 ## Objective
 - Practice multithreading (or multiprocessing in bonus stages).
 - Ensure correct synchronization using mutexes, semaphores, or shared memory.
 - Prevent deadlocks, resource starvation, and race conditions.
 
+
+## Demo Video
+
+[![Watch Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
 
