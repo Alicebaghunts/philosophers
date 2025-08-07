@@ -22,3 +22,5 @@ They must:
 
 
 ## Demo Video
+
+/Users/alicebaghunts/Desktop/Screen Recording.gif
