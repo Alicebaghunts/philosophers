@@ -1,7 +1,6 @@
 ## Project Overview
 Implement the classical Dining Philosophers Problem, where philosophers alternately think, eat, and sleep around a table with shared forks. This simulates synchronization, resource contention, and deadlock prevention.
 
-```
 Imagine N philosophers sitting around a circular table. Each philosopher has:
 -----------------------------------------------------------------------------
 A plate of spaghetti
@@ -13,7 +12,7 @@ They must:
 * Eat for a while
 * Sleep for a while
 * Repeat...
-```
+
 <img src="https://github.com/user-attachments/assets/96c6bd24-f769-4680-8413-be5bc80270bd" alt="Philosopher Diagram" width="450"/>
 
 ## Objective
