@@ -1,11 +1,7 @@
-
-
 ## 🧠 Project Overview
 Implement the classical Dining Philosophers Problem, where philosophers alternately think, eat, and sleep around a table with shared forks. This simulates synchronization, resource contention, and deadlock prevention.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/96c6bd24-f769-4680-8413-be5bc80270bd" alt="Philosopher Diagram" width="350"/>
-</p>
+<img src="https://github.com/user-attachments/assets/96c6bd24-f769-4680-8413-be5bc80270bd" alt="Philosopher Diagram" width="450"/>
 
 ## 🎯 Objective
 - Practice multithreading (or multiprocessing in bonus stages).
