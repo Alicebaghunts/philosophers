@@ -21,8 +21,6 @@ They must:
 - Prevent deadlocks, resource starvation, and race conditions.
 
 
-## Demo Video
-## Demo
+## My Makefile
 
-![Screen Recording](/Users/alicebaghunts/Desktop/Screen_Recording)
-
+<img width="656" height="763" alt="Screenshot 2025-08-07 at 14 06 09" src="https://github.com/user-attachments/assets/fe5f6219-5786-48d2-a25d-a534211fe686" />
