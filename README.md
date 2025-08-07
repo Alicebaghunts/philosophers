@@ -4,7 +4,7 @@ Implement the classical Dining Philosophers Problem, where philosophers alternat
 Imagine N philosophers sitting around a circular table. Each philosopher has:
 -----------------------------------------------------------------------------
 A plate of spaghetti
-A fork to their left and fork to their right
+A fork to their left and fork to their right.
 They must:
 
 * Think for a while
