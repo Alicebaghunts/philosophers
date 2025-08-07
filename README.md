@@ -22,6 +22,3 @@ They must:
 
 
 ## Demo Video
-
-[![Watch Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
-
