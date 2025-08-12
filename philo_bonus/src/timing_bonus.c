@@ -40,6 +40,6 @@ void	philo_usleep(int sleep_time)
 		current = get_time_in_ms();
 		if (current - start >= sleep_time)
 			break ;
-		usleep(100);
+		usleep(200);
 	}
 }

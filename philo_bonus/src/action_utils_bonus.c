@@ -18,7 +18,7 @@ void	actions(t_philo *philo)
 	pthread_create(&philo->table->monitoring_thread,
 		NULL, check_death_philo, philo);
 	if (philo->index % 2 == 0)
-		usleep(500);
+		usleep(1500);
 	while (1)
 	{
 		philo_eating(philo);

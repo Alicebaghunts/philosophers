@@ -22,6 +22,6 @@ void	create_philo(t_table *table)
 		table->pid[index] = fork();
 		if (table->pid[index] == 0)
 			actions(&table->philo[index]);
-		usleep(1500);
+		usleep(1000);
 	}
 }
